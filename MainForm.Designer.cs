@@ -21,6 +21,7 @@
             funcionáriosToolStripMenuItem = new ToolStripMenuItem();
             categoriasToolStripMenuItem = new ToolStripMenuItem();
             processosToolStripMenuItem = new ToolStripMenuItem();
+            estadosToolStripMenuItem = new ToolStripMenuItem();
             btnProcesso = new Button();
             btnLP = new Button();
             dgvProcesso = new DataGridView();
@@ -44,7 +45,7 @@
             lstServicoExterno = new ListBox();
             lstEstado = new ListBox();
             lstPrioridade = new ListBox();
-            estadosToolStripMenuItem = new ToolStripMenuItem();
+            btnRemoverLP = new Button();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProcesso).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvLP).BeginInit();
@@ -86,6 +87,13 @@
             processosToolStripMenuItem.Name = "processosToolStripMenuItem";
             processosToolStripMenuItem.Size = new Size(71, 20);
             processosToolStripMenuItem.Text = "Processos";
+            // 
+            // estadosToolStripMenuItem
+            // 
+            estadosToolStripMenuItem.Name = "estadosToolStripMenuItem";
+            estadosToolStripMenuItem.Size = new Size(59, 20);
+            estadosToolStripMenuItem.Text = "Estados";
+            estadosToolStripMenuItem.Click += estadosToolStripMenuItem_Click;
             // 
             // btnProcesso
             // 
@@ -143,11 +151,11 @@
             // 
             // btnRemover
             // 
-            btnRemover.Location = new Point(247, 686);
+            btnRemover.Location = new Point(902, 686);
             btnRemover.Name = "btnRemover";
-            btnRemover.Size = new Size(137, 23);
+            btnRemover.Size = new Size(118, 23);
             btnRemover.TabIndex = 12;
-            btnRemover.Text = "Remover selecionado";
+            btnRemover.Text = "Remover processo";
             btnRemover.UseVisualStyleBackColor = true;
             btnRemover.Click += btnRemover_Click_1;
             // 
@@ -176,6 +184,7 @@
             cmbPrioridade.Name = "cmbPrioridade";
             cmbPrioridade.Size = new Size(121, 23);
             cmbPrioridade.TabIndex = 15;
+            cmbPrioridade.SelectedIndexChanged += cmbPrioridade_SelectedIndexChanged;
             // 
             // cmbFuncionario
             // 
@@ -293,16 +302,20 @@
             lstPrioridade.Size = new Size(210, 199);
             lstPrioridade.TabIndex = 28;
             // 
-            // estadosToolStripMenuItem
+            // btnRemoverLP
             // 
-            estadosToolStripMenuItem.Name = "estadosToolStripMenuItem";
-            estadosToolStripMenuItem.Size = new Size(59, 20);
-            estadosToolStripMenuItem.Text = "Estados";
-            estadosToolStripMenuItem.Click += estadosToolStripMenuItem_Click;
+            btnRemoverLP.Location = new Point(1026, 686);
+            btnRemoverLP.Name = "btnRemoverLP";
+            btnRemoverLP.Size = new Size(88, 23);
+            btnRemoverLP.TabIndex = 29;
+            btnRemoverLP.Text = "Remover LP";
+            btnRemoverLP.UseVisualStyleBackColor = true;
+            btnRemoverLP.Click += btnRemoverLP_Click;
             // 
             // MainForm
             // 
             ClientSize = new Size(1361, 711);
+            Controls.Add(btnRemoverLP);
             Controls.Add(lstPrioridade);
             Controls.Add(lstEstado);
             Controls.Add(lstServicoExterno);
@@ -367,5 +380,6 @@
         private ListBox lstEstado;
         private ListBox lstPrioridade;
         private ToolStripMenuItem estadosToolStripMenuItem;
+        private Button btnRemoverLP;
     }
 }

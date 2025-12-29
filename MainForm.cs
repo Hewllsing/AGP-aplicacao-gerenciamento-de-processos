@@ -42,9 +42,16 @@ namespace AGP.Forms
             // Carrega os estados no ComboBox
             db.Estados.Load();
             cmbEstado.DataSource = db.Estados.Local.ToList();
-            cmbCategoria.DisplayMember = "Designacao";
-            cmbCategoria.ValueMember = "Id";
+            cmbEstado.DisplayMember = "Designacao";
+            cmbEstado.ValueMember = "Id";
             cmbEstado.SelectedIndex = -1; // Nenhum item selecionado inicialmente
+
+            // Carrega as prioridades no ComboBox
+            db.Prioridades.Load();
+            cmbPrioridade.DataSource = db.Prioridades.Local.ToList();
+            cmbPrioridade.DisplayMember = "Designacao";
+            cmbPrioridade.ValueMember = "Id";
+            cmbPrioridade.SelectedIndex = -1; // Nenhum item selecionado inicialmente
 
             carregarGrid = false;
         }
@@ -144,7 +151,10 @@ namespace AGP.Forms
                     db.SaveChanges();
                 }
             }
+        }
 
+        private void btnRemoverLP_Click(object sender, EventArgs e)
+        {
             if (dgvLP.CurrentRow != null) // Verifica se há uma linha selecionada no DataGridView
             {
                 LinhaProcesso linhaProcesso = new LinhaProcesso();
@@ -160,6 +170,8 @@ namespace AGP.Forms
             }
             bs.EndEdit(); // Finaliza a edição do BindingSource
         }
+
+
         // ---------------------------------------------------------------
         //               FILTRO DE PROCESSOS
         // ---------------------------------------------------------------
@@ -182,7 +194,7 @@ namespace AGP.Forms
                 }
                 else
                 {
-                    dgvProcesso.DataSource = db.Processos.Where(m => m.CategoriaId == categoriaSelecionada.Id).ToList(); // Filtra os processos pela categoria selecionada
+                    dgvProcesso.DataSource = db.Processos.Where(c => c.CategoriaId == categoriaSelecionada.Id).ToList(); // Filtra os processos pela categoria selecionada
                 }
             }
         }
@@ -196,19 +208,39 @@ namespace AGP.Forms
             }
             else
             {
-                Estado EstadoSelecionada = cmbEstado.SelectedItem as Estado; // Obtém a categoria selecionada no ComboBox
+                Estado estadoSelecionada = cmbEstado.SelectedItem as Estado; // Obtém o estado selecionada no ComboBox
 
-                if (EstadoSelecionada == null)
+                if (estadoSelecionada == null)
                 {
                     return;
                 }
                 else
                 {
-                    dgvProcesso.DataSource = db.Processos.Where(m => m.Estado == EstadoSelecionada.Id).ToList(); // Filtra os processos pelo Estado selecionado
+                    dgvProcesso.DataSource = db.Processos.Where(e => e.Estado == estadoSelecionada.Id).ToList(); // Filtra os processos pelo Estado selecionado
                 }
             }
         }
 
+        private void cmbPrioridade_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Filtra os processos pela Prioridade selecionada no ComboBox
+            if (carregarGrid == true || cmbPrioridade.SelectedIndex == -1) //  Verifica se o grid está pronto para carregar ou se nenhum estado está selecionado
+            {
+                return;
+            }
+            else
+            {
+                Prioridade prioridadeSelecionada = cmbPrioridade.SelectedItem as Prioridade; // Obtém a Prioridade selecionada no ComboBox
 
+                if (prioridadeSelecionada == null)
+                {
+                    return;
+                }
+                else
+                {
+                    dgvProcesso.DataSource = db.Processos.Where(p => p.PrioridadeId == prioridadeSelecionada.Id).ToList(); // Filtra os processos pela Prioridade selecionada
+                }
+            }
+        }
     }
 }
