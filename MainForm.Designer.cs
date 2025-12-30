@@ -193,6 +193,7 @@
             cmbFuncionario.Name = "cmbFuncionario";
             cmbFuncionario.Size = new Size(121, 23);
             cmbFuncionario.TabIndex = 16;
+            cmbFuncionario.SelectedIndexChanged += cmbFuncionario_SelectedIndexChanged;
             // 
             // cmbCliente
             // 
@@ -201,6 +202,7 @@
             cmbCliente.Name = "cmbCliente";
             cmbCliente.Size = new Size(121, 23);
             cmbCliente.TabIndex = 17;
+            cmbCliente.SelectedIndexChanged += cmbCliente_SelectedIndexChanged;
             // 
             // lblCategoria
             // 

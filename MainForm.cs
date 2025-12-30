@@ -53,6 +53,20 @@ namespace AGP.Forms
             cmbPrioridade.ValueMember = "Id";
             cmbPrioridade.SelectedIndex = -1; // Nenhum item selecionado inicialmente
 
+            // Carrega os funcionarios no ComboBox
+            db.Funcionarios.Load();
+            cmbFuncionario.DataSource = db.Funcionarios.Local.ToList();
+            cmbFuncionario.DisplayMember = "NomeFuncionario";
+            cmbFuncionario.ValueMember = "Id";
+            cmbFuncionario.SelectedIndex = -1; // Nenhum item selecionado inicialmente
+
+            // Carrega os clientes no ComboBox
+            db.Clientes.Load();
+            cmbCliente.DataSource = db.Clientes.Local.ToList();
+            cmbCliente.DisplayMember = "NomeCliente";
+            cmbCliente.ValueMember = "Id";
+            cmbCliente.SelectedIndex = -1; // Nenhum item selecionado inicialmente
+
             carregarGrid = false;
         }
 
@@ -221,6 +235,7 @@ namespace AGP.Forms
             }
         }
 
+        // Filtra os processos pela prioridade selecionada no ComboBox
         private void cmbPrioridade_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Filtra os processos pela Prioridade selecionada no ComboBox
@@ -239,6 +254,52 @@ namespace AGP.Forms
                 else
                 {
                     dgvProcesso.DataSource = db.Processos.Where(p => p.PrioridadeId == prioridadeSelecionada.Id).ToList(); // Filtra os processos pela Prioridade selecionada
+                }
+            }
+        }
+
+        // Filtra os processos pelo funcionário selecionado no ComboBox
+        private void cmbFuncionario_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Filtra os processos pela Prioridade selecionada no ComboBox
+            if (carregarGrid == true || cmbFuncionario.SelectedIndex == -1) //  Verifica se o grid está pronto para carregar ou se nenhum estado está selecionado
+            {
+                return;
+            }
+            else
+            {
+                Funcionario funcionarioSelecionada = cmbFuncionario.SelectedItem as Funcionario; // Obtém o Funcionario selecionado no ComboBox
+
+                if (funcionarioSelecionada == null)
+                {
+                    return;
+                }
+                else
+                {
+                    dgvProcesso.DataSource = db.Processos.Where(f => f.FuncionarioId == funcionarioSelecionada.Id).ToList(); // Filtra os processos pelo Funcionario selecionado
+                }
+            }
+        }
+
+        // Filtra os processos pelo cliente selecionado no ComboBox
+        private void cmbCliente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Filtra os processos pela Prioridade selecionada no ComboBox
+            if (carregarGrid == true || cmbCliente.SelectedIndex == -1) //  Verifica se o grid está pronto para carregar ou se nenhum estado está selecionado
+            {
+                return;
+            }
+            else
+            {
+                Cliente clienteSelecionado = cmbCliente.SelectedItem as Cliente; // Obtém o Cliente selecionado no ComboBox
+
+                if (clienteSelecionado == null)
+                {
+                    return;
+                }
+                else
+                {
+                    dgvProcesso.DataSource = db.Processos.Where(c => c.ClienteId == clienteSelecionado.Id).ToList(); // Filtra os processos pelo Cliente selecionado
                 }
             }
         }
