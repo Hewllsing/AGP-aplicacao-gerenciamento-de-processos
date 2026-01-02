@@ -190,118 +190,71 @@ namespace AGP.Forms
         //               FILTRO DE PROCESSOS
         // ---------------------------------------------------------------
 
-        // Filtra os processos pela categoria selecionada no ComboBox
+        // Instância da classe responsável por aplicar os filtros nos processos
+        ProcessoFilter filter = new ProcessoFilter();
+
+
+        // Método central que aplica todos os filtros de forma cumulativa
+        private void AplicarFiltros()
+        {
+            // Evita aplicar filtros enquanto o grid ainda está carregando
+            if (carregarGrid) return;
+
+            // Chama a classe de filtro, passando:
+            // - a consulta base dos processos
+            // - os valores selecionados nos ComboBox (se existirem)
+            var query = filter.FiltrarProcessos(
+                db.Processos,
+                cmbCategoria.SelectedItem as Categoria,
+                cmbEstado.SelectedItem as Estado,
+                cmbPrioridade.SelectedItem as Prioridade,
+                cmbFuncionario.SelectedItem as Funcionario,
+                cmbCliente.SelectedItem as Cliente
+            );
+
+            // Atualiza o DataGridView com o resultado filtrado
+            dgvProcesso.DataSource = query.ToList();
+        }
+
+
+        // Evento disparado ao alterar a categoria selecionada no ComboBox
         private void cmbCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Filtra os processos pela categoria selecionada no ComboBox
-            if (carregarGrid == true || cmbCategoria.SelectedIndex == -1)
-            {
-                return;
-            }
-            else
-            {
-                Categoria categoriaSelecionada = cmbCategoria.SelectedItem as Categoria; // Obtém a categoria selecionada no ComboBox
-
-                if (categoriaSelecionada == null)
-                {
-                    return;
-                }
-                else
-                {
-                    dgvProcesso.DataSource = db.Processos.Where(c => c.CategoriaId == categoriaSelecionada.Id).ToList(); // Filtra os processos pela categoria selecionada
-                }
-            }
+            // Reaplica todos os filtros considerando a nova categoria
+            AplicarFiltros();
         }
 
-        // Filtra os processos pelo estado selecionado no ComboBox
+
+        // Evento disparado ao alterar o estado selecionado no ComboBox
         private void cmbEstado_SelectedIndexChanged(object sender, EventArgs e)
-        {   // Filtra os processos pelo estado selecionado no ComboBox
-            if (carregarGrid == true || cmbEstado.SelectedIndex == -1) //  Verifica se o grid está pronto para carregar ou se nenhum estado está selecionado
-            {
-                return;
-            }
-            else
-            {
-                Estado estadoSelecionada = cmbEstado.SelectedItem as Estado; // Obtém o estado selecionada no ComboBox
-
-                if (estadoSelecionada == null)
-                {
-                    return;
-                }
-                else
-                {
-                    dgvProcesso.DataSource = db.Processos.Where(e => e.Estado == estadoSelecionada.Id).ToList(); // Filtra os processos pelo Estado selecionado
-                }
-            }
+        {
+            // Reaplica todos os filtros considerando o novo estado
+            AplicarFiltros();
         }
 
-        // Filtra os processos pela prioridade selecionada no ComboBox
+
+        // Evento disparado ao alterar a prioridade selecionada no ComboBox
         private void cmbPrioridade_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Filtra os processos pela Prioridade selecionada no ComboBox
-            if (carregarGrid == true || cmbPrioridade.SelectedIndex == -1) //  Verifica se o grid está pronto para carregar ou se nenhum estado está selecionado
-            {
-                return;
-            }
-            else
-            {
-                Prioridade prioridadeSelecionada = cmbPrioridade.SelectedItem as Prioridade; // Obtém a Prioridade selecionada no ComboBox
-
-                if (prioridadeSelecionada == null)
-                {
-                    return;
-                }
-                else
-                {
-                    dgvProcesso.DataSource = db.Processos.Where(p => p.PrioridadeId == prioridadeSelecionada.Id).ToList(); // Filtra os processos pela Prioridade selecionada
-                }
-            }
+            // Reaplica todos os filtros considerando a nova prioridade
+            AplicarFiltros();
         }
 
-        // Filtra os processos pelo funcionário selecionado no ComboBox
+
+        // Evento disparado ao alterar o funcionário selecionado no ComboBox
         private void cmbFuncionario_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Filtra os processos pela Prioridade selecionada no ComboBox
-            if (carregarGrid == true || cmbFuncionario.SelectedIndex == -1) //  Verifica se o grid está pronto para carregar ou se nenhum estado está selecionado
-            {
-                return;
-            }
-            else
-            {
-                Funcionario funcionarioSelecionada = cmbFuncionario.SelectedItem as Funcionario; // Obtém o Funcionario selecionado no ComboBox
-
-                if (funcionarioSelecionada == null)
-                {
-                    return;
-                }
-                else
-                {
-                    dgvProcesso.DataSource = db.Processos.Where(f => f.FuncionarioId == funcionarioSelecionada.Id).ToList(); // Filtra os processos pelo Funcionario selecionado
-                }
-            }
+            // Reaplica todos os filtros considerando o novo funcionário
+            AplicarFiltros();
         }
 
-        // Filtra os processos pelo cliente selecionado no ComboBox
+
+        // Evento disparado ao alterar o cliente selecionado no ComboBox
         private void cmbCliente_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Filtra os processos pela Prioridade selecionada no ComboBox
-            if (carregarGrid == true || cmbCliente.SelectedIndex == -1) //  Verifica se o grid está pronto para carregar ou se nenhum estado está selecionado
-            {
-                return;
-            }
-            else
-            {
-                Cliente clienteSelecionado = cmbCliente.SelectedItem as Cliente; // Obtém o Cliente selecionado no ComboBox
+            // Reaplica todos os filtros considerando o novo cliente
+            AplicarFiltros();
 
-                if (clienteSelecionado == null)
-                {
-                    return;
-                }
-                else
-                {
-                    dgvProcesso.DataSource = db.Processos.Where(c => c.ClienteId == clienteSelecionado.Id).ToList(); // Filtra os processos pelo Cliente selecionado
-                }
-            }
         }
     }
 }
