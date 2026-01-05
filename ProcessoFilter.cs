@@ -42,13 +42,13 @@ namespace AGP
 
         {
 
-            // ------------- LIST BOX FILTROS ------------- //
+            // ------------- LIST BOX FILTROS ------------- 
 
             // Aplica filtro por Categoria, caso exista
             if (lstCategoria != null)
             {
                 query = query.Where(p => p.CategoriaId == lstCategoria.Id);
-            }else
+            }
 
             // Aplica filtro por Estado, caso exista
             if (lstEstado != null)
@@ -62,7 +62,7 @@ namespace AGP
                 query = query.Where(p => p.PrioridadeId == lstPrioridade.Id);
             }
 
-            // ------------- COMBO BOX FILTROS ------------- //
+            // ------------- COMBO BOX FILTROS ------------- 
 
             // Aplica filtro por Categoria, caso exista
             if (categoria != null)

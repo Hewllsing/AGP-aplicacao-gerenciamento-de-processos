@@ -26,7 +26,7 @@ namespace AGP.Forms
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            // ----------------- GRID VIEW -------------------------
+            // ----------------- GRID VIEW ------------------------- 
 
             // Configurações iniciais do DataGridView
             dgvProcesso.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Configura o DataGridView para ajustar o tamanho das colunas automaticamente
@@ -34,7 +34,7 @@ namespace AGP.Forms
             dgvLP.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvLP.AutoGenerateColumns = true;
 
-            // ----------------- COMBO BOX -------------------------
+            // ----------------- COMBO BOX ------------------------- 
 
             // Carrega as categorias no ComboBox
             db.Categorias.Load();
@@ -71,7 +71,7 @@ namespace AGP.Forms
             cmbCliente.ValueMember = "Id";
             cmbCliente.SelectedIndex = -1; // Nenhum item selecionado inicialmente
 
-            // ----------------- LIST BOX -------------------------
+            // ----------------- LIST BOX ------------------------- 
 
             // Carrega no ListBox as Categorias
             db.Categorias.Load();
@@ -290,20 +290,25 @@ namespace AGP.Forms
 
         }
 
-        // --------------- LIST BOX ------------------
+        // --------------- LIST BOX ------------------ 
         private void lstServicoExterno_SelectedIndexChanged(object sender, EventArgs e) // lstCategoria
-        {
+        {   // Reaplica todos os filtros considerando a nova categoria
             AplicarFiltros();
         }
 
         private void lstEstado_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {   // Reaplica todos os filtros considerando o novo estado
             AplicarFiltros();
         }
 
         private void lstPrioridade_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {   // Reaplica todos os filtros considerando a nova prioridade
             AplicarFiltros();
         }
+
+        // Novas implementações de filtro
+        // Criar um botao para dar clear em todos os filtros
+        // Criar um index provavelmente na posicao 0 com "Todos daquela categoria" 
+
     }
 }
