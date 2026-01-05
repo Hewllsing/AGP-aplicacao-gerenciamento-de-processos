@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AGP.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251205142644_innitialMigration")]
-    partial class innitialMigration
+    [Migration("20260105160934_migracaoInicial")]
+    partial class migracaoInicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -170,7 +170,7 @@ namespace AGP.Migrations
                     b.Property<string>("Descricao")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Estado")
+                    b.Property<int?>("EstadoId")
                         .HasColumnType("int");
 
                     b.Property<int?>("FuncionarioId")

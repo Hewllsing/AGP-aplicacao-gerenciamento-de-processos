@@ -26,11 +26,15 @@ namespace AGP.Forms
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            // ----------------- GRID VIEW -------------------------
+
             // Configurações iniciais do DataGridView
             dgvProcesso.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Configura o DataGridView para ajustar o tamanho das colunas automaticamente
             dgvProcesso.AutoGenerateColumns = true; // Configura o DataGridView para gerar colunas automaticamente
             dgvLP.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvLP.AutoGenerateColumns = true;
+
+            // ----------------- COMBO BOX -------------------------
 
             // Carrega as categorias no ComboBox
             db.Categorias.Load();
@@ -66,6 +70,30 @@ namespace AGP.Forms
             cmbCliente.DisplayMember = "NomeCliente";
             cmbCliente.ValueMember = "Id";
             cmbCliente.SelectedIndex = -1; // Nenhum item selecionado inicialmente
+
+            // ----------------- LIST BOX -------------------------
+
+            // Carrega no ListBox as Categorias
+            db.Categorias.Load();
+            lstCategoria.DataSource = db.Categorias.Local.ToList();
+            lstCategoria.DisplayMember = "Designacao";
+            lstCategoria.ValueMember = "Id";
+            lstCategoria.SelectedIndex = -1; // Nenhum item selecionado inicialmente
+
+            // Carrega no ListBox os Estados
+            db.Estados.Load();
+            lstEstado.DataSource = db.Estados.Local.ToList();
+            lstEstado.DisplayMember = "Designacao";
+            lstEstado.ValueMember = "Id";
+            lstEstado.SelectedIndex = -1; // Nenhum item selecionado inicialmente
+
+            // Carrega no ListBox as Prioridades
+            db.Prioridades.Load();
+            lstPrioridade.DataSource = db.Prioridades.Local.ToList();
+            lstPrioridade.DisplayMember = "Designacao";
+            lstPrioridade.ValueMember = "Id";
+            lstPrioridade.SelectedIndex = -1; // Nenhum item selecionado inicialmente
+
 
             carregarGrid = false;
         }
@@ -194,7 +222,7 @@ namespace AGP.Forms
         ProcessoFilter filter = new ProcessoFilter();
 
 
-        // Método central que aplica todos os filtros de forma cumulativa
+        //Método central que aplica todos os filtros de forma cumulativa
         private void AplicarFiltros()
         {
             // Evita aplicar filtros enquanto o grid ainda está carregando
@@ -209,7 +237,12 @@ namespace AGP.Forms
                 cmbEstado.SelectedItem as Estado,
                 cmbPrioridade.SelectedItem as Prioridade,
                 cmbFuncionario.SelectedItem as Funcionario,
-                cmbCliente.SelectedItem as Cliente
+                cmbCliente.SelectedItem as Cliente,
+
+                lstCategoria.SelectedItem as Categoria,
+                lstEstado.SelectedItem as Estado,
+                lstPrioridade.SelectedItem as Prioridade
+
             );
 
             // Atualiza o DataGridView com o resultado filtrado
@@ -255,6 +288,22 @@ namespace AGP.Forms
             // Reaplica todos os filtros considerando o novo cliente
             AplicarFiltros();
 
+        }
+
+        // --------------- LIST BOX ------------------
+        private void lstServicoExterno_SelectedIndexChanged(object sender, EventArgs e) // lstCategoria
+        {
+            AplicarFiltros();
+        }
+
+        private void lstEstado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AplicarFiltros();
+        }
+
+        private void lstPrioridade_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AplicarFiltros();
         }
     }
 }

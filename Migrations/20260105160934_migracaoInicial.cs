@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AGP.Migrations
 {
     /// <inheritdoc />
-    public partial class innitialMigration : Migration
+    public partial class migracaoInicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -113,7 +113,7 @@ namespace AGP.Migrations
                     SupervisorId = table.Column<int>(type: "int", nullable: true),
                     CategoriaId = table.Column<int>(type: "int", nullable: true),
                     PrioridadeId = table.Column<int>(type: "int", nullable: true),
-                    Estado = table.Column<int>(type: "int", nullable: true)
+                    EstadoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {

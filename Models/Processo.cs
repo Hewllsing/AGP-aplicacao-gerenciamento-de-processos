@@ -29,7 +29,7 @@ namespace AGP.Models
       
         public int? PrioridadeId { get; set; }
       
-        public int? Estado { get; set; }
+        public int? EstadoId { get; set; }
 
     }
 }

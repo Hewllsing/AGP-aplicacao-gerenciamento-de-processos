@@ -167,7 +167,7 @@ namespace AGP.Migrations
                     b.Property<string>("Descricao")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Estado")
+                    b.Property<int?>("EstadoId")
                         .HasColumnType("int");
 
                     b.Property<int?>("FuncionarioId")

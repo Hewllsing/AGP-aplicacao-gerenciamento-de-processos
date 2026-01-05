@@ -35,8 +35,35 @@ namespace AGP
             Estado estado,
             Prioridade prioridade,
             Funcionario funcionario,
-            Cliente cliente)
+            Cliente cliente, 
+            Categoria lstCategoria,
+            Estado lstEstado,
+            Prioridade lstPrioridade)
+
         {
+
+            // ------------- LIST BOX FILTROS ------------- //
+
+            // Aplica filtro por Categoria, caso exista
+            if (lstCategoria != null)
+            {
+                query = query.Where(p => p.CategoriaId == lstCategoria.Id);
+            }else
+
+            // Aplica filtro por Estado, caso exista
+            if (lstEstado != null)
+            {
+                query = query.Where(p => p.EstadoId == lstEstado.Id);
+            }
+
+            // Aplica filtro por Prioridade, caso exista
+            if (lstPrioridade != null)
+            {
+                query = query.Where(p => p.PrioridadeId == lstPrioridade.Id);
+            }
+
+            // ------------- COMBO BOX FILTROS ------------- //
+
             // Aplica filtro por Categoria, caso exista
             if (categoria != null)
             {
@@ -46,7 +73,7 @@ namespace AGP
             // Aplica filtro por Estado, caso exista
             if (estado != null)
             {
-                query = query.Where(p => p.Estado == estado.Id);
+                query = query.Where(p => p.EstadoId == estado.Id);
             }
 
             // Aplica filtro por Prioridade, caso exista

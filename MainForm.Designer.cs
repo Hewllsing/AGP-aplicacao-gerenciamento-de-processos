@@ -42,7 +42,7 @@
             rdbSimples = new RadioButton();
             rdbCompleto = new RadioButton();
             label7 = new Label();
-            lstServicoExterno = new ListBox();
+            lstCategoria = new ListBox();
             lstEstado = new ListBox();
             lstPrioridade = new ListBox();
             btnRemoverLP = new Button();
@@ -280,21 +280,25 @@
             label7.TabIndex = 25;
             label7.Text = "Visualização da grid";
             // 
-            // lstServicoExterno
+            // lstCategoria
             // 
-            lstServicoExterno.FormattingEnabled = true;
-            lstServicoExterno.Location = new Point(1120, 79);
-            lstServicoExterno.Name = "lstServicoExterno";
-            lstServicoExterno.Size = new Size(210, 199);
-            lstServicoExterno.TabIndex = 26;
+            lstCategoria.AccessibleName = "";
+            lstCategoria.FormattingEnabled = true;
+            lstCategoria.Location = new Point(1120, 79);
+            lstCategoria.Name = "lstCategoria";
+            lstCategoria.Size = new Size(210, 199);
+            lstCategoria.TabIndex = 26;
+            lstCategoria.SelectedIndexChanged += lstServicoExterno_SelectedIndexChanged;
             // 
             // lstEstado
             // 
+            lstEstado.AccessibleName = "";
             lstEstado.FormattingEnabled = true;
             lstEstado.Location = new Point(1120, 287);
             lstEstado.Name = "lstEstado";
             lstEstado.Size = new Size(210, 184);
             lstEstado.TabIndex = 27;
+            lstEstado.SelectedIndexChanged += lstEstado_SelectedIndexChanged;
             // 
             // lstPrioridade
             // 
@@ -303,6 +307,7 @@
             lstPrioridade.Name = "lstPrioridade";
             lstPrioridade.Size = new Size(210, 199);
             lstPrioridade.TabIndex = 28;
+            lstPrioridade.SelectedIndexChanged += lstPrioridade_SelectedIndexChanged;
             // 
             // btnRemoverLP
             // 
@@ -320,7 +325,7 @@
             Controls.Add(btnRemoverLP);
             Controls.Add(lstPrioridade);
             Controls.Add(lstEstado);
-            Controls.Add(lstServicoExterno);
+            Controls.Add(lstCategoria);
             Controls.Add(label7);
             Controls.Add(rdbCompleto);
             Controls.Add(rdbSimples);
@@ -378,7 +383,7 @@
         private RadioButton rdbSimples;
         private RadioButton rdbCompleto;
         private Label label7;
-        private ListBox lstServicoExterno;
+        private ListBox lstCategoria;
         private ListBox lstEstado;
         private ListBox lstPrioridade;
         private ToolStripMenuItem estadosToolStripMenuItem;
