@@ -47,51 +47,106 @@ namespace AGP
             // Aplica filtro por Categoria, caso exista
             if (lstCategoria != null)
             {
-                query = query.Where(p => p.CategoriaId == lstCategoria.Id);
+                if (lstCategoria.Id == 0) // "Todas" categorias
+                {
+                    query = query.Where(p => p.CategoriaId != 0); // Mantém todos os processos (nenhum filtro aplicado)
+                }
+                else
+                {
+                    query = query.Where(p => p.CategoriaId == lstCategoria.Id); // Filtra pela categoria selecionada
+                }
             }
 
             // Aplica filtro por Estado, caso exista
             if (lstEstado != null)
             {
-                query = query.Where(p => p.EstadoId == lstEstado.Id);
+                if (lstEstado.Id == 0) // "Todos" estados
+                {
+                    query = query.Where(p => p.EstadoId != 0); // Mantém todos os processos (nenhum filtro aplicado)
+                }
+                else
+                { 
+                    query = query.Where(p => p.EstadoId == lstEstado.Id); // Filtra pelo estado selecionado
+                }
             }
 
             // Aplica filtro por Prioridade, caso exista
             if (lstPrioridade != null)
             {
-                query = query.Where(p => p.PrioridadeId == lstPrioridade.Id);
+                if (lstPrioridade.Id == 0) // "Todas" prioridades
+                {
+                    query = query.Where(p => p.PrioridadeId != 0); // Mantém todos os processos (nenhum filtro aplicado)
+                }
+                else
+                { 
+                    query = query.Where(p => p.PrioridadeId == lstPrioridade.Id); // Filtra pela prioridade selecionada
+                }
             }
 
             // ------------- COMBO BOX FILTROS ------------- 
 
             // Aplica filtro por Categoria, caso exista
-            if (categoria != null)
+            if (categoria != null) // Evita filtro desnecessário quando "Todas" categorias é selecionada
             {
-                query = query.Where(p => p.CategoriaId == categoria.Id);
+                if (categoria.Id == 0) // "Todas" categorias
+                {
+                    query = query.Where(p => p.CategoriaId != 0); // Mantém todos os processos (nenhum filtro aplicado)
+                }
+                else
+                {
+                    query = query.Where(p => p.CategoriaId == categoria.Id); // Filtra pela categoria selecionada
+                }
             }
 
             // Aplica filtro por Estado, caso exista
             if (estado != null)
             {
-                query = query.Where(p => p.EstadoId == estado.Id);
+                if (estado.Id == 0) // "Todos" estados
+                {
+                    query = query.Where(p => p.EstadoId != 0); // Mantém todos os processos (nenhum filtro aplicado)
+                }
+                else
+                {
+                    query = query.Where(p => p.EstadoId == estado.Id); // Filtra pelo estado selecionado
+                }
             }
 
             // Aplica filtro por Prioridade, caso exista
             if (prioridade != null)
             {
-                query = query.Where(p => p.PrioridadeId == prioridade.Id);
+                if (prioridade.Id == 0) // "Todas" prioridades
+                {
+                    query = query.Where(p => p.PrioridadeId != 0); // Mantém todos os processos (nenhum filtro aplicado)
+                }
+                else
+                {
+                    query = query.Where(p => p.PrioridadeId == prioridade.Id); // Filtra pela prioridade selecionada
+                }
             }
 
             // Aplica filtro por Funcionário, caso exista
             if (funcionario != null)
             {
-                query = query.Where(p => p.FuncionarioId == funcionario.Id);
+                if (funcionario.Id == 0) // "Todos" funcionários
+                {
+                    query = query.Where(p => p.FuncionarioId != 0); // Mantém todos os processos (nenhum filtro aplicado)
+                }
+                else
+                {
+                    query = query.Where(p => p.FuncionarioId == funcionario.Id); // Filtra pelo funcionário selecionado
+                }
             }
-
             // Aplica filtro por Cliente, caso exista
             if (cliente != null)
-            {
-                query = query.Where(p => p.ClienteId == cliente.Id);
+            {   
+                if (cliente.Id == 0) // "Todos" clientes
+                {
+                    query = query.Where(p => p.ClienteId != 0); // Mantém todos os processos (nenhum filtro aplicado)
+                }
+                else
+                {
+                    query = query.Where(p => p.ClienteId == cliente.Id); // Filtra pelo cliente selecionado
+                }
             }
 
             // Retorna a query com todos os filtros aplicados

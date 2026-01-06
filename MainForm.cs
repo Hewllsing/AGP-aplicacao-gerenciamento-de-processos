@@ -34,6 +34,30 @@ namespace AGP.Forms
             dgvLP.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvLP.AutoGenerateColumns = true;
 
+            // ----------------- ADICIONA OPÇÃO "EXIBIR TODOS" NOS FILTROS ------------------------- 
+
+            // Adiciona a opção "Exibir todas" no ComboBox/ListBox de Categorias
+            var exibirTodasCategorias = db.Categorias.Local.ToBindingList(); // Pega a lista atual de categorias
+            exibirTodasCategorias.Insert(0, new Categoria { Id = 0, Designacao = "Exibir todas" }); // Insere a opção "Exibir todas" na posição 0
+
+
+            // Adiciona a opção "Exibir todas" no ComboBox/ListBox de Estados
+            var exibirTodosEstados = db.Estados.Local.ToBindingList(); // Pega a lista atual de estados
+            exibirTodosEstados.Insert(0, new Estado { Id = 0, Designacao = "Exibir todos" }); // Insere a opção "Exibir todos" na posição 0
+
+            // Adiciona a opção "Exibir todas" no ComboBox/ListBox de Prioridades
+            var exibirTodasPrioridades = db.Prioridades.Local.ToBindingList(); // Pega a lista atual de prioridades
+            exibirTodasPrioridades.Insert(0, new Prioridade { Id = 0, Designacao = "Exibir todas" }); // Insere a opção "Exibir todas" na posição 0
+
+            // Adiciona a opção "Exibir todos" no ComboBox/ListBox de Funcionarios
+            var exibirTodosFuncionarios = db.Funcionarios.Local.ToBindingList(); // Pega a lista atual de funcionarios
+            exibirTodosFuncionarios.Insert(0, new Funcionario { Id = 0, NomeFuncionario = "Exibir todos" }); // Insere a opção "Exibir todos" na posição 0
+
+            // Adiciona a opção "Exibir todos" no ComboBox/ListBox de Clientes
+            var exibirTodosClientes = db.Clientes.Local.ToBindingList(); // Pega a lista atual de clientes
+            exibirTodosClientes.Insert(0, new Cliente { Id = 0, NomeCliente = "Exibir todos" }); // Insere a opção "Exibir todos" na posição 0
+
+           
             // ----------------- COMBO BOX ------------------------- 
 
             // Carrega as categorias no ComboBox
@@ -94,7 +118,6 @@ namespace AGP.Forms
             lstPrioridade.ValueMember = "Id";
             lstPrioridade.SelectedIndex = -1; // Nenhum item selecionado inicialmente
 
-
             carregarGrid = false;
         }
 
@@ -145,10 +168,6 @@ namespace AGP.Forms
             db.Processos.Load();
             bs.DataSource = db.Processos.Local.ToBindingList();
             dgvProcesso.DataSource = bs.DataSource; // Define o DataSource do DataGridView para o BindingSource
-
-            bs.EndEdit();
-            db.SaveChanges();
-
         }
 
         // Exibe todas as linhas de processo no DataGridView
@@ -157,10 +176,6 @@ namespace AGP.Forms
             db.LinhasProcessos.Load();
             bs.DataSource = db.LinhasProcessos.Local.ToBindingList();
             dgvLP.DataSource = bs.DataSource; // Define o DataSource do DataGridView para o BindingSource
-
-
-            bs.EndEdit();
-            db.SaveChanges();
         }
 
         // Salva as alterações feitas nas células do DataGridView
@@ -179,16 +194,19 @@ namespace AGP.Forms
 
         // Remover o processo selecionado no DataGridView
         private void btnRemover_Click_1(object sender, EventArgs e)
-        {   // PROBLEMA REMOVE DAS DUAS GRID
+        {   // Verifica se há uma linha selecionada no DataGridView
             if (dgvProcesso.CurrentRow != null)
             {
                 Processo processo = new Processo();
 
+                // Pega o Id da linha selecionada
                 var idProcesso = Convert.ToInt32(dgvProcesso.CurrentRow.Cells["Id"].Value);
                 processo = db.Processos.Find(idProcesso);
 
+                
                 if (processo != null)
                 {
+                    // Remove o processo do banco de dados
                     db.Processos.Remove(processo);
                     db.SaveChanges();
                 }
@@ -206,6 +224,7 @@ namespace AGP.Forms
 
                 if (linhaProcesso != null)
                 {
+                    // Remove a LinhaProcesso do banco de dados
                     db.LinhasProcessos.Remove(linhaProcesso);
                     db.SaveChanges();
                 }
@@ -306,9 +325,21 @@ namespace AGP.Forms
             AplicarFiltros();
         }
 
-        // Novas implementações de filtro
-        // Criar um botao para dar clear em todos os filtros
-        // Criar um index provavelmente na posicao 0 com "Todos daquela categoria" 
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {   
+            // Limpa os filtros, combobox e os listbox
+            cmbCategoria.SelectedIndex = -1;
+            cmbEstado.SelectedIndex = -1;
+            cmbPrioridade.SelectedIndex = -1;
+            cmbFuncionario.SelectedIndex = -1;
+            cmbCliente.SelectedIndex = -1;
+            lstCategoria.SelectedIndex = -1;
+            lstEstado.SelectedIndex = -1;
+            lstPrioridade.SelectedIndex = -1;
 
+            // Limpa a BidingSource e depois aplica na grid para limpar ela também
+            dgvProcesso.DataSource = null;
+            dgvLP.DataSource = null;
+        }
     }
 }

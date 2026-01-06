@@ -46,6 +46,7 @@
             lstEstado = new ListBox();
             lstPrioridade = new ListBox();
             btnRemoverLP = new Button();
+            btnLimpar = new Button();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProcesso).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvLP).BeginInit();
@@ -319,9 +320,20 @@
             btnRemoverLP.UseVisualStyleBackColor = true;
             btnRemoverLP.Click += btnRemoverLP_Click;
             // 
+            // btnLimpar
+            // 
+            btnLimpar.Location = new Point(247, 686);
+            btnLimpar.Name = "btnLimpar";
+            btnLimpar.Size = new Size(75, 23);
+            btnLimpar.TabIndex = 30;
+            btnLimpar.Text = "Limpar";
+            btnLimpar.UseVisualStyleBackColor = true;
+            btnLimpar.Click += btnLimpar_Click;
+            // 
             // MainForm
             // 
             ClientSize = new Size(1361, 711);
+            Controls.Add(btnLimpar);
             Controls.Add(btnRemoverLP);
             Controls.Add(lstPrioridade);
             Controls.Add(lstEstado);
@@ -388,5 +400,6 @@
         private ListBox lstPrioridade;
         private ToolStripMenuItem estadosToolStripMenuItem;
         private Button btnRemoverLP;
+        private Button btnLimpar;
     }
 }
