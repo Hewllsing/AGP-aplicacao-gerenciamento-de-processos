@@ -57,7 +57,7 @@ namespace AGP.Forms
             var exibirTodosClientes = db.Clientes.Local.ToBindingList(); // Pega a lista atual de clientes
             exibirTodosClientes.Insert(0, new Cliente { Id = 0, NomeCliente = "Exibir todos" }); // Insere a opção "Exibir todos" na posição 0
 
-           
+
             // ----------------- COMBO BOX ------------------------- 
 
             // Carrega as categorias no ComboBox
@@ -203,7 +203,7 @@ namespace AGP.Forms
                 var idProcesso = Convert.ToInt32(dgvProcesso.CurrentRow.Cells["Id"].Value);
                 processo = db.Processos.Find(idProcesso);
 
-                
+
                 if (processo != null)
                 {
                     // Remove o processo do banco de dados
@@ -219,18 +219,33 @@ namespace AGP.Forms
             {
                 LinhaProcesso linhaProcesso = new LinhaProcesso();
 
-                var idLP = Convert.ToInt32(dgvLP.CurrentRow.Cells["Id"].Value); // Pega o Id da linha selecionada
-                linhaProcesso = db.LinhasProcessos.Find(idLP); // Encontra a LinhaProcesso no banco de dados pelo Id
+                DialogResult result = MessageBox.Show("Tem certeza que deseja eliminar esta Linha de Processo?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                if (linhaProcesso != null)
+                if (result == DialogResult.Yes)
                 {
-                    // Remove a LinhaProcesso do banco de dados
-                    db.LinhasProcessos.Remove(linhaProcesso);
-                    db.SaveChanges();
+                    // Continua com a eliminação
+
+                    var idLP = Convert.ToInt32(dgvLP.CurrentRow.Cells["Id"].Value); // Pega o Id da linha selecionada
+                    linhaProcesso = db.LinhasProcessos.Find(idLP); // Encontra a LinhaProcesso no banco de dados pelo Id
+
+                    if (linhaProcesso != null)
+                    {
+                        // Remove a LinhaProcesso do banco de dados
+                        db.LinhasProcessos.Remove(linhaProcesso);
+                        db.SaveChanges();
+                    }
+                    bs.EndEdit(); // Finaliza a edição do BindingSource
                 }
+
+                else
+                {
+                    // Cancela a eliminação
+                    return;
+                }
+
             }
-            bs.EndEdit(); // Finaliza a edição do BindingSource
         }
+
 
 
         // ---------------------------------------------------------------
@@ -326,7 +341,7 @@ namespace AGP.Forms
         }
 
         private void btnLimpar_Click(object sender, EventArgs e)
-        {   
+        {
             // Limpa os filtros, combobox e os listbox
             cmbCategoria.SelectedIndex = -1;
             cmbEstado.SelectedIndex = -1;
@@ -341,5 +356,30 @@ namespace AGP.Forms
             dgvProcesso.DataSource = null;
             dgvLP.DataSource = null;
         }
+
+        private void dgvProcesso_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F4)
+            {
+                FormClientes formClientes = new FormClientes(); // Cria o formulário de clientes
+                formClientes.Show(); // Exibe o formulário de clientes
+            }
+        }
+
+        // 4 - utilizar a tecla F4 para invocar o form dos clientes
+        // 5 - utilizar a classe dialogResult para confirmar a eliminação de um processo 
+        // 6 - criar a classe configurador 
+        //      - criar o método configurarForm1
+        //           - coloca AGP no titulo do form1
+        //           - coloca o ícone no form1
+
+
+
+
     }
 }

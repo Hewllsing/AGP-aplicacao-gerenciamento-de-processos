@@ -123,6 +123,7 @@
             dgvProcesso.Name = "dgvProcesso";
             dgvProcesso.Size = new Size(1089, 332);
             dgvProcesso.TabIndex = 8;
+            dgvProcesso.KeyDown += dgvProcesso_KeyDown;
             // 
             // dgvLP
             // 
@@ -359,10 +360,12 @@
             Controls.Add(btnLP);
             Controls.Add(btnProcesso);
             Controls.Add(menuStrip1);
+            KeyPreview = true;
             MainMenuStrip = menuStrip1;
             Name = "MainForm";
             Text = "Clientes";
             Load += MainForm_Load;
+            KeyDown += MainForm_KeyDown;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProcesso).EndInit();
