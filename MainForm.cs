@@ -376,15 +376,5 @@ namespace AGP.Forms
             c.ConfigurarForm1(this); // Chama o método para configurar o Form1(this)
         }
 
-        // 4 - utilizar a tecla F4 para invocar o form dos clientes
-        // 5 - utilizar a classe dialogResult para confirmar a eliminação de um processo 
-        // 6 - criar a classe configurador 
-        //      - criar o método configurarForm1
-        //           - coloca AGP no titulo do form1
-        //           - coloca o ícone no form1
-
-
-
-
     }
 }
