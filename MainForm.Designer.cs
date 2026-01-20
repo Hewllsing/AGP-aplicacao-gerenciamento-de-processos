@@ -24,29 +24,30 @@
             estadosToolStripMenuItem = new ToolStripMenuItem();
             btnProcesso = new Button();
             btnLP = new Button();
+            btnRemover = new Button();
+            btnLimpar = new Button();
+            btnRemoverLP = new Button();
             dgvProcesso = new DataGridView();
             dgvLP = new DataGridView();
-            label1 = new Label();
-            label2 = new Label();
-            btnRemover = new Button();
             cmbCategoria = new ComboBox();
             cmbEstado = new ComboBox();
             cmbPrioridade = new ComboBox();
             cmbFuncionario = new ComboBox();
             cmbCliente = new ComboBox();
             lblCategoria = new Label();
+            label1 = new Label();
+            label2 = new Label();
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
+            label7 = new Label();
             rdbSimples = new RadioButton();
             rdbCompleto = new RadioButton();
-            label7 = new Label();
             lstCategoria = new ListBox();
             lstEstado = new ListBox();
             lstPrioridade = new ListBox();
-            btnRemoverLP = new Button();
-            btnLimpar = new Button();
+            btnAttNome = new Button();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProcesso).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvLP).BeginInit();
@@ -116,6 +117,36 @@
             btnLP.UseVisualStyleBackColor = true;
             btnLP.Click += btnLP_Click;
             // 
+            // btnRemover
+            // 
+            btnRemover.Location = new Point(902, 686);
+            btnRemover.Name = "btnRemover";
+            btnRemover.Size = new Size(118, 23);
+            btnRemover.TabIndex = 12;
+            btnRemover.Text = "Remover processo";
+            btnRemover.UseVisualStyleBackColor = true;
+            btnRemover.Click += btnRemover_Click_1;
+            // 
+            // btnLimpar
+            // 
+            btnLimpar.Location = new Point(247, 686);
+            btnLimpar.Name = "btnLimpar";
+            btnLimpar.Size = new Size(75, 23);
+            btnLimpar.TabIndex = 30;
+            btnLimpar.Text = "Limpar";
+            btnLimpar.UseVisualStyleBackColor = true;
+            btnLimpar.Click += btnLimpar_Click;
+            // 
+            // btnRemoverLP
+            // 
+            btnRemoverLP.Location = new Point(1026, 686);
+            btnRemoverLP.Name = "btnRemoverLP";
+            btnRemoverLP.Size = new Size(88, 23);
+            btnRemoverLP.TabIndex = 29;
+            btnRemoverLP.Text = "Remover LP";
+            btnRemoverLP.UseVisualStyleBackColor = true;
+            btnRemoverLP.Click += btnRemoverLP_Click;
+            // 
             // dgvProcesso
             // 
             dgvProcesso.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -132,34 +163,6 @@
             dgvLP.Name = "dgvLP";
             dgvLP.Size = new Size(1089, 236);
             dgvLP.TabIndex = 9;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(1002, 426);
-            label1.Name = "label1";
-            label1.Size = new Size(112, 15);
-            label1.TabIndex = 10;
-            label1.Text = "Linhas de Processos";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(1055, 61);
-            label2.Name = "label2";
-            label2.Size = new Size(59, 15);
-            label2.TabIndex = 11;
-            label2.Text = "Processos";
-            // 
-            // btnRemover
-            // 
-            btnRemover.Location = new Point(902, 686);
-            btnRemover.Name = "btnRemover";
-            btnRemover.Size = new Size(118, 23);
-            btnRemover.TabIndex = 12;
-            btnRemover.Text = "Remover processo";
-            btnRemover.UseVisualStyleBackColor = true;
-            btnRemover.Click += btnRemover_Click_1;
             // 
             // cmbCategoria
             // 
@@ -215,6 +218,24 @@
             lblCategoria.TabIndex = 18;
             lblCategoria.Text = "Categorias";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(1002, 426);
+            label1.Name = "label1";
+            label1.Size = new Size(112, 15);
+            label1.TabIndex = 10;
+            label1.Text = "Linhas de Processos";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(1055, 61);
+            label2.Name = "label2";
+            label2.Size = new Size(59, 15);
+            label2.TabIndex = 11;
+            label2.Text = "Processos";
+            // 
             // label3
             // 
             label3.AutoSize = true;
@@ -251,6 +272,15 @@
             label6.TabIndex = 22;
             label6.Text = "Clientes";
             // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(26, 421);
+            label7.Name = "label7";
+            label7.Size = new Size(111, 15);
+            label7.TabIndex = 25;
+            label7.Text = "Visualização da grid";
+            // 
             // rdbSimples
             // 
             rdbSimples.AutoSize = true;
@@ -272,15 +302,6 @@
             rdbCompleto.TabStop = true;
             rdbCompleto.Text = "Completo";
             rdbCompleto.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Location = new Point(26, 421);
-            label7.Name = "label7";
-            label7.Size = new Size(111, 15);
-            label7.TabIndex = 25;
-            label7.Text = "Visualização da grid";
             // 
             // lstCategoria
             // 
@@ -311,29 +332,20 @@
             lstPrioridade.TabIndex = 28;
             lstPrioridade.SelectedIndexChanged += lstPrioridade_SelectedIndexChanged;
             // 
-            // btnRemoverLP
+            // btnAttNome
             // 
-            btnRemoverLP.Location = new Point(1026, 686);
-            btnRemoverLP.Name = "btnRemoverLP";
-            btnRemoverLP.Size = new Size(88, 23);
-            btnRemoverLP.TabIndex = 29;
-            btnRemoverLP.Text = "Remover LP";
-            btnRemoverLP.UseVisualStyleBackColor = true;
-            btnRemoverLP.Click += btnRemoverLP_Click;
-            // 
-            // btnLimpar
-            // 
-            btnLimpar.Location = new Point(247, 686);
-            btnLimpar.Name = "btnLimpar";
-            btnLimpar.Size = new Size(75, 23);
-            btnLimpar.TabIndex = 30;
-            btnLimpar.Text = "Limpar";
-            btnLimpar.UseVisualStyleBackColor = true;
-            btnLimpar.Click += btnLimpar_Click;
+            btnAttNome.Location = new Point(333, 686);
+            btnAttNome.Name = "btnAttNome";
+            btnAttNome.Size = new Size(103, 23);
+            btnAttNome.TabIndex = 31;
+            btnAttNome.Text = "Atualizar nome";
+            btnAttNome.UseVisualStyleBackColor = true;
+            btnAttNome.Click += btnAttNome_Click;
             // 
             // MainForm
             // 
             ClientSize = new Size(1361, 711);
+            Controls.Add(btnAttNome);
             Controls.Add(btnLimpar);
             Controls.Add(btnRemoverLP);
             Controls.Add(lstPrioridade);
@@ -378,31 +390,32 @@
         private ToolStripMenuItem funcionáriosToolStripMenuItem;
         private ToolStripMenuItem categoriasToolStripMenuItem;
         private ToolStripMenuItem processosToolStripMenuItem;
-        private Button btnProcesso;
-        private Button btnLP;
+        private ToolStripMenuItem estadosToolStripMenuItem;
         private DataGridView dgvProcesso;
         private DataGridView dgvLP;
-        private Label label1;
-        private Label label2;
+        private Button btnProcesso;
+        private Button btnLP;
         private Button btnRemover;
+        private Button btnRemoverLP;
+        private Button btnLimpar;
+        private RadioButton rdbSimples;
+        private RadioButton rdbCompleto;
         private ComboBox cmbCategoria;
         private ComboBox cmbEstado;
         private ComboBox cmbPrioridade;
         private ComboBox cmbFuncionario;
         private ComboBox cmbCliente;
+        private Label label1;
         private Label lblCategoria;
+        private Label label2;
         private Label label3;
         private Label label4;
         private Label label5;
         private Label label6;
-        private RadioButton rdbSimples;
-        private RadioButton rdbCompleto;
         private Label label7;
         private ListBox lstCategoria;
         private ListBox lstEstado;
         private ListBox lstPrioridade;
-        private ToolStripMenuItem estadosToolStripMenuItem;
-        private Button btnRemoverLP;
-        private Button btnLimpar;
+        private Button btnAttNome;
     }
 }

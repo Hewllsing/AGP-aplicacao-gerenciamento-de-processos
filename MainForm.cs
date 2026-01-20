@@ -126,9 +126,6 @@ namespace AGP.Forms
         // ---------------------------------------------------------------
 
 
-
-
-
         // Exibe o form clientes
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -161,6 +158,7 @@ namespace AGP.Forms
         // ---------------------------------------------------------------
         //                       PROCESSOS
         // ---------------------------------------------------------------
+
 
         // Exibe todas as linhas de processo no DataGridView
         private void btnProcesso_Click(object sender, EventArgs e)
@@ -251,6 +249,7 @@ namespace AGP.Forms
         // ---------------------------------------------------------------
         //               FILTRO DE PROCESSOS
         // ---------------------------------------------------------------
+
 
         // Instância da classe responsável por aplicar os filtros nos processos
         ProcessoFilter filter = new ProcessoFilter();
@@ -369,6 +368,12 @@ namespace AGP.Forms
                 FormClientes formClientes = new FormClientes(); // Cria o formulário de clientes
                 formClientes.Show(); // Exibe o formulário de clientes
             }
+        }
+
+        private void btnAttNome_Click(object sender, EventArgs e)
+        {
+            Configurador c = new Configurador();
+            c.ConfigurarForm1(this); // Chama o método para configurar o Form1(this)
         }
 
         // 4 - utilizar a tecla F4 para invocar o form dos clientes
